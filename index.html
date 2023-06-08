@@ -14,14 +14,16 @@
     <div id="header">
         <div class="container">
             <nav>
-                <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Contact</a></li>
-                
+                <ul id="sidemenu">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#About">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#Contact">Contact</a></li>
+                <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
+  
                 </ul> 
+                <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
             <div class="header-text">
                 <p>Architectural Designer</p>
@@ -172,6 +174,39 @@
             <a href="#" class="btn">Explore More</a>
         </div>
     </div>
+
+    <!-------------------------Contact------------------------------------------------>
+    <div id="Contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p> <i class="fa-solid fa-envelope"></i>okwizera90@gmail.com</p>
+                    <p> <i class="fa-solid fa-phone"></i>+250788754678</p>
+                    <div class="social-icons">
+                      <a href="https://www.linkedin.com/in/kwizera-omer/"><i class="fa-brands fa-linkedin"></i></a> 
+                      <a href="https://twitter.com/e_m_e_t"><i class="fa-brands fa-twitter"></i></a>
+                      <a href="https://www.facebook.com/kwizera.omer.35/"><i class="fa-brands fa-facebook"></i></a>
+                      <a href="https://www.instagram.com/kwizera_omer/"><i class="fa-brands fa-instagram"></i></a>
+                      <a href="https://github.com/kwizerao"><i class="fa-brands fa-github"></i></a> 
+                    </div>
+                    <a href="images/Resume.pdf" download class="btn btn2">Download Resume</a>
+                </div>
+                <div class="contact-right">
+                    <form name="submit-to-google-sheet">
+                        <input type="text" name="Name" placeholder="Your Name" required>
+                        <input type="email" name="Email" placeholder="Your email" required>
+                        <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+                        <button class="btn btn3" type="submit">Submit</button>
+                    </form>
+                    <span id="msg"></span>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copyright  <span>Architect</span> Omer. © 2023</p>
+        </div>
+    </div>
 <script>
     
 var tablinks =  document.getElementsByClassName("tab-links");
@@ -189,6 +224,34 @@ function opentab(tabname){
 }
 
 </script>
+<script>
+    var sidemenu = document.getElementById("sidemenu");
+    function openmenu(){
+        sidemenu.style.right = "0";
+    }
+    function closemenu(){
+        sidemenu.style.right = "-200px";
+    }
+</script>
+
+<script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxCltxFAB6Ix0o1JhtFRwMI95F4bufIiHu8TSu3thDl-8_zP9dAWd6eDK3qd__toH3gzw/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            msg.innerHTML = "Hello, Your Message is Well Received Thanks!"
+            setTimeout(function(){
+                msg.innerHTML = ""
+            },4000)
+            form.reset()
+        }) 
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 
 </body>
 </html>
